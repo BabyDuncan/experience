@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="serverDirectory"
+          class="com.sohu.twitter.ginkgo.Default.config.DefaultDirectoryFactoryBean">
+    </bean>
+
+    <bean id="helloClientBaseConfig" class="com.sohu.twitter.ginkgo.cluster.conf.ClientProxyBaseInfo">
+        <property name="application" value="BabyDuncan"/>
+        <property name="serverDirectory" ref="serverDirectory"/>
+    </bean>
+
+    <bean id="duncanService" class="com.sohu.twitter.ginkgo.cluster.proxy.ClientProxy">
+        <property name="serviceName" value="helloService"/>
+        <property name="serviceInterface"
+                  value="interfaces.HelloService"/>
+        <property name="clientProxyBaseInfo" ref="helloClientBaseConfig"/>
+    </bean>
+</beans>
